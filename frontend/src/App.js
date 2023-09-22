@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Hotels from './components/hotels/Hotels';
+import CreateHotel from "./components/hotels/CreateHotel";
 import HotelDetails from './components/hotels/[id]';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
@@ -18,6 +19,7 @@ function App() {
             <Route path='/hotels/:id' element={<><Header /><HotelDetails /></>} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/createHotel' element={<CreateHotel />} />
           </Routes>
         </BrowserRouter>
       </AppContext.Provider>

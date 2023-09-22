@@ -4,6 +4,8 @@ import axios from 'axios';
 import { BsSearch } from "react-icons/bs";
 import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { AppContext } from './AppContext';
+import LocationIcon from '../Icons/Location'
+import RatingIcon from '../Icons/Rating'
 
 export function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value)
@@ -127,6 +129,10 @@ const Hotels = () => {
         }
     }
 
+    const rating = Math.round(hotels.rating);
+    const filledStars = Array.from({ length: Math.min(5, Math.max(0, rating)) });
+    const emptyStars = Array.from({ length: Math.min(5, Math.max(0, 5 - rating)) });
+
     if (loading) {
         return (
             <div className='flex justify-center items-center h-screen'>
@@ -204,16 +210,30 @@ const Hotels = () => {
                                     </div>
                                 </div>
                                 <div className='p-4'>
-                                    <h1 className='text-lg font-semibold text-gray-700'>{hotel.name}</h1>
-                                    <div className='flex items-center mt-2'>
-                                        {[...Array(Math.round(hotel.rating))].map((_, index) => (
-                                            <AiFillStar key={index} className='h-4 w-4 text-yellow-400' />
-                                        ))}
-                                        {[...Array(5 - Math.round(hotel.rating))].map((_, index) => (
-                                            <AiFillStar key={index} className='h-4 w-4 text-gray-400' />
-                                        ))}
-                                        <span className='text-sm font-semibold text-gray-500 ml-2'>{hotel.rating}</span>
+                                    <div className='flex items-center'>
+                                        <h1 className='text-lg font-bold text-gray-700'>{hotel.name}</h1>
+                                        <div className='flex items-center ml-auto'>
+                                            <LocationIcon />
+                                            <button className='ml-1 text-gray-500'>{hotel.address && hotel.address.city ? hotel.address.city : "City Not Available"}</button>
+                                        </div>
                                     </div>
+                                    <h1 className='text-sm font-semibold text-gray-500'>{hotel.description}</h1>
+                                        { hotel.rating && <div className='flex items-center mt-2'>
+                                            {filledStars.map((_, index) => (
+                                                <AiFillStar key={index} className='h-4 w-4 text-yellow-400' />
+                                            ))}
+                                            {emptyStars.map((_, index) => (
+                                                <AiFillStar key={index} className='h-4 w-4 text-gray-400' />
+                                            ))}
+                                            <div className="flex items-center">
+                                                <p className="text-sm font-bold text-gray-900 mr-2">{hotel.rating}</p>
+                                                <svg className="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                                <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                                <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline">73 reviews</a>
+                                            </div>
+                                        </div>}
                                     <div className='flex items-center mt-2'>
                                         <span className='text-sm font-semibold text-gray-500'>{hotel.type}</span>
                                     </div>
