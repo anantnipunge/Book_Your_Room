@@ -1,10 +1,9 @@
-# Hotel Room Booking App
+# StayEase - A Hotel Room Booking App
 
-# Some Images
-# Home page
+## Home page
 ![image](https://github.com/anantnipunge/Book_Your_Room/assets/82041920/b4f5335b-df8e-4c6e-92ed-c2d61e2a2e7d)
 
-# Admin panel page
+## Admin panel page
 ![image](https://github.com/anantnipunge/Book_Your_Room/assets/82041920/c0b73a30-99dd-42a1-8fc8-ffd945500ac4)
 
 
